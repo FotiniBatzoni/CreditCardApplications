@@ -8,7 +8,8 @@ namespace CreditCardApplications.Tests
         public void AcceptingHighIncomeApplecations()
         {
             //sut = systemUnderTest
-            var sut = new CreditCardApplicationEvaluator();
+            //we supply null instead new FrequentFlyerNumberValidatorService()
+            var sut = new CreditCardApplicationEvaluator(null);
 
             var application = new CreditCardApplication { GrossAnnualIncome = 100_000 };
 
@@ -20,7 +21,8 @@ namespace CreditCardApplications.Tests
         [Fact]
         public void ReferYoungApplications()
         {
-            var sut = new CreditCardApplicationEvaluator();
+            //we supply null instead new FrequentFlyerNumberValidatorService()
+            var sut = new CreditCardApplicationEvaluator(null);
 
             var application = new CreditCardApplication { Age = 19 };
 
