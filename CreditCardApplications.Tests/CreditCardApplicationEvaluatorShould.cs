@@ -31,6 +31,8 @@ namespace CreditCardApplications.Tests
             //we supply null instead new FrequentFlyerNumberValidatorService()
             //var sut = new CreditCardApplicationEvaluator(null);
 
+            mockValidator.Setup(x => x.IsValid(It.IsAny<string>())).Returns(true);
+
             var sut = new CreditCardApplicationEvaluator(mockValidator.Object);
 
             var application = new CreditCardApplication { Age = 19 };
