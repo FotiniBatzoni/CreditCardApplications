@@ -22,10 +22,15 @@
                 return CreditCardApplicationDecision.AutoAccepted;
             }
 
-      
+            //for testing properties
+            //_validator.LicenceKey == "EXPIRED"
+            if (_validator.ServiceInformation.Licence.LicenceKey == "EXPIRED")
+            {
+                return CreditCardApplicationDecision.ReferredToHuman;
+            }
 
             //for tests
-                var isValidFrequentFlyerNumber = _validator.IsValid(application.FrequentFlyerNumber);
+            var isValidFrequentFlyerNumber = _validator.IsValid(application.FrequentFlyerNumber);
 
             //for tests
                 if( !isValidFrequentFlyerNumber)
@@ -33,12 +38,7 @@
                     return CreditCardApplicationDecision.ReferredToHuman;
                 }
 
-            //for testing properties
-            //_validator.LicenceKey == "EXPIRED"
-            if (_validator.ServiceInformation.Licence.LicenceKey == "EXPIRED")
-            {
-                return CreditCardApplicationDecision.ReferredToHuman;
-            }
+
 
             if (application.Age <= AutoReferralMaxAge)
             {
