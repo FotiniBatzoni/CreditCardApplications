@@ -36,5 +36,12 @@ namespace CreditCardApplications
         //}
 
         public IServiceInformation ServiceInformation => throw new NotImplementedException();
+
+        public ValidationMode ValidationMode 
+        {
+            get => throw new NotImplementedException("For Demo Purposes");
+            set => throw new NotImplementedException("For Demo Purposes");
+
+        }
     }
 }

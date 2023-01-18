@@ -21,5 +21,7 @@ namespace CreditCardApplications
 
         //instead of LicenceKey
         IServiceInformation ServiceInformation { get; }
+
+        ValidationMode ValidationMode { get; set; }
     }
 }
