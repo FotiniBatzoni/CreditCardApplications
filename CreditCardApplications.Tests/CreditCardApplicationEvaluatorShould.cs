@@ -104,8 +104,10 @@ namespace CreditCardApplications.Tests
         {
             Mock<IFrequentFlyerNumberValidator> mockValidator = new Mock<IFrequentFlyerNumberValidator>(MockBehavior.Loose);
 
+            mockValidator.Setup(x => x.ServiceInformation.Licence.LicenceKey).Returns("OK");
+
             //it is neseccery when we use MockBehavior.Strict
-         
+
             mockValidator.Setup(x => x.IsValid(It.IsAny<string>())).Returns(false);
 
             var sut = new CreditCardApplicationEvaluator(mockValidator.Object);
