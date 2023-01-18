@@ -16,6 +16,7 @@ namespace CreditCardApplications
     /// </summary>
     public class FrequentFlyerNumberValidatorService : IFrequentFlyerNumberValidator
     {
+
         public bool IsValid(string frequentFlyerNumber)
         {
             throw new NotImplementedException("Simulate this real dependency being hard to use");
@@ -24,6 +25,14 @@ namespace CreditCardApplications
         public void IsValid(string frequentFlyerNumber, out bool isValid)
         {
             throw new NotImplementedException("Simulate this real dependency being hard to use");
+        }
+
+        public string LicenceKey
+        {
+            get
+            {
+                throw new NotImplementedException("For demo purposes");
+            }
         }
     }
 }
