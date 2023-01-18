@@ -114,44 +114,76 @@ namespace CreditCardApplications.Tests
            Assert.Equal(CreditCardApplicationDecision.ReferredToHuman, decision);   
         }
 
-        [Fact]
-        public void DeclineLowIncomeApplicationsOutDemo()
-        {
-            Mock<IFrequentFlyerNumberValidator> mockValidator = new Mock<IFrequentFlyerNumberValidator>();
+        //[Fact]
+        //public void DeclineLowIncomeApplicationsOutDemo()
+        //{
+        //    Mock<IFrequentFlyerNumberValidator> mockValidator = new Mock<IFrequentFlyerNumberValidator>();
 
-            bool isValid = true;
-            mockValidator.Setup(x => x.IsValid(It.IsAny<string>(), out isValid));
+        //    bool isValid = true;
+        //    mockValidator.Setup(x => x.IsValid(It.IsAny<string>(), out isValid));
 
-            var sut = new CreditCardApplicationEvaluator(mockValidator.Object);
+        //    var sut = new CreditCardApplicationEvaluator(mockValidator.Object);
 
-            var application = new CreditCardApplication
-            {
-                GrossAnnualIncome = 19_999,
-                Age = 42
-            };
+        //    var application = new CreditCardApplication
+        //    {
+        //        GrossAnnualIncome = 19_999,
+        //        Age = 42
+        //    };
 
-            CreditCardApplicationDecision decision = sut.EvaluateUsingOut(application);
+        //    CreditCardApplicationDecision decision = sut.EvaluateUsingOut(application);
 
-            Assert.Equal(CreditCardApplicationDecision.AutoDeclined, decision);
-        }
+        //    Assert.Equal(CreditCardApplicationDecision.AutoDeclined, decision);
+        //}
+
+        //[Fact]
+        //public void ReferWhenLicenceKeyExpired()
+        //{
+        //    var mockValidator = new Mock<IFrequentFlyerNumberValidator>();
+
+        //    mockValidator.Setup(x => x.IsValid(It.IsAny<string>())).Returns(true);
+
+        //    //Mocking LicenceKey Property
+        //    //1 way
+        //    //mockValidator.Setup(x => x.LicenceKey).Returns("EXPIRED");
+
+        //    //2 way
+        //    //when there is a LicenceKey property
+        //    //mockValidator.Setup(x => x.LicenceKey).Returns(GetLicenseKeyExpireString);
+
+
+        //    var sut = new CreditCardApplicationEvaluator(mockValidator.Object);
+
+        //    var application = new CreditCardApplication {  Age = 42 };
+
+        //    CreditCardApplicationDecision decision = sut.Evaluate(application);
+
+        //    Assert.Equal(CreditCardApplicationDecision.ReferredToHuman, decision);
+        //}
 
         [Fact]
         public void ReferWhenLicenceKeyExpired()
         {
+            //3 way
+            //when we use interfaces
+            //var mockLisenceData = new Mock<ILicenceData>();
+            //mockLisenceData.Setup(x => x.LicenceKey).Returns("EXPIRED");
+
+            //var mockServiceInfo = new Mock<IServiceInformation>();
+            //mockServiceInfo.Setup(x => x.Licence).Returns(mockLisenceData.Object);
+
+            //var mockValidator = new Mock<IFrequentFlyerNumberValidator>();
+            //mockValidator.Setup(x => x.ServiceInformation).Returns(mockServiceInfo.Object);
+
+            //4 way
             var mockValidator = new Mock<IFrequentFlyerNumberValidator>();
+            mockValidator.Setup(x => x.ServiceInformation.Licence.LicenceKey).Returns("EXPIRED");
 
             mockValidator.Setup(x => x.IsValid(It.IsAny<string>())).Returns(true);
 
-            //Mocking LicenceKey Property
-            //1 way
-            //mockValidator.Setup(x => x.LicenceKey).Returns("EXPIRED");
-
-            //2 way
-            mockValidator.Setup(x => x.LicenceKey).Returns(GetLicenseKeyExpireString);
 
             var sut = new CreditCardApplicationEvaluator(mockValidator.Object);
 
-            var application = new CreditCardApplication {  Age = 42 };
+            var application = new CreditCardApplication { Age = 42 };
 
             CreditCardApplicationDecision decision = sut.Evaluate(application);
 

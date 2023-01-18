@@ -22,11 +22,7 @@
                 return CreditCardApplicationDecision.AutoAccepted;
             }
 
-            //for testing properties
-            if(_validator.LicenceKey == "EXPIRED")
-            {
-                return CreditCardApplicationDecision.ReferredToHuman;
-            }
+      
 
             //for tests
                 var isValidFrequentFlyerNumber = _validator.IsValid(application.FrequentFlyerNumber);
@@ -37,30 +33,9 @@
                     return CreditCardApplicationDecision.ReferredToHuman;
                 }
 
-            if (application.Age <= AutoReferralMaxAge)
-            {
-                return CreditCardApplicationDecision.ReferredToHuman;
-            }
-
-            if (application.GrossAnnualIncome < LowIncomeThreshold)
-            {
-                return CreditCardApplicationDecision.AutoDeclined;
-            }
-
-            return CreditCardApplicationDecision.ReferredToHuman;
-        }
-
-        public CreditCardApplicationDecision EvaluateUsingOut(CreditCardApplication application)
-        {
-            if (application.GrossAnnualIncome >= HighIncomeThreshold)
-            {
-                return CreditCardApplicationDecision.AutoAccepted;
-            }
-
-            _validator.IsValid(application.FrequentFlyerNumber,
-                               out var isValidFrequentFlyerNumber);
-
-            if (!isValidFrequentFlyerNumber)
+            //for testing properties
+            //_validator.LicenceKey == "EXPIRED"
+            if (_validator.ServiceInformation.Licence.LicenceKey == "EXPIRED")
             {
                 return CreditCardApplicationDecision.ReferredToHuman;
             }
@@ -75,7 +50,37 @@
                 return CreditCardApplicationDecision.AutoDeclined;
             }
 
+     
+
             return CreditCardApplicationDecision.ReferredToHuman;
         }
+
+        //public CreditCardApplicationDecision EvaluateUsingOut(CreditCardApplication application)
+        //{
+        //    if (application.GrossAnnualIncome >= HighIncomeThreshold)
+        //    {
+        //        return CreditCardApplicationDecision.AutoAccepted;
+        //    }
+
+        //    _validator.IsValid(application.FrequentFlyerNumber,
+        //                       out var isValidFrequentFlyerNumber);
+
+        //    if (!isValidFrequentFlyerNumber)
+        //    {
+        //        return CreditCardApplicationDecision.ReferredToHuman;
+        //    }
+
+        //    if (application.Age <= AutoReferralMaxAge)
+        //    {
+        //        return CreditCardApplicationDecision.ReferredToHuman;
+        //    }
+
+        //    if (application.GrossAnnualIncome < LowIncomeThreshold)
+        //    {
+        //        return CreditCardApplicationDecision.AutoDeclined;
+        //    }
+
+        //    return CreditCardApplicationDecision.ReferredToHuman;
+        //}
     }
 }

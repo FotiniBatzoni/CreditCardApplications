@@ -27,12 +27,14 @@ namespace CreditCardApplications
             throw new NotImplementedException("Simulate this real dependency being hard to use");
         }
 
-        public string LicenceKey
-        {
-            get
-            {
-                throw new NotImplementedException("For demo purposes");
-            }
-        }
+        //public string LicenceKey
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException("For demo purposes");
+        //    }
+        //}
+
+        public IServiceInformation ServiceInformation => throw new NotImplementedException();
     }
 }
