@@ -49,6 +49,7 @@ namespace CreditCardApplications.Tests
         {
             Mock<IFrequentFlyerNumberValidator> mockValidator = new Mock<IFrequentFlyerNumberValidator>();
 
+            mockValidator.Setup(x => x.ServiceInformation.Licence.LicenceKey).Returns("OK");
 
             //1 way
             //to setup isValid to true
