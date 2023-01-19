@@ -238,7 +238,8 @@ namespace CreditCardApplications.Tests
 
             sut.Evaluate(application);
 
-            mockValidator.Verify(x => x.IsValid(It.IsAny<string>()));
+            //"Frequent Flyer Number should be validated" is a Custom Error Message
+            mockValidator.Verify(x => x.IsValid(It.IsAny<string>()), "Frequent Flyer Number should be validated" );
         }
     }
 }
