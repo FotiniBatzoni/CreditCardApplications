@@ -230,11 +230,15 @@ namespace CreditCardApplications.Tests
 
             var sut = new CreditCardApplicationEvaluator(mockValidator.Object);
 
-            var application = new CreditCardApplication { Age = 30 };
+            var application = new CreditCardApplication
+            {
+                FrequentFlyerNumber = "q"
+            };
+
 
             sut.Evaluate(application);
 
-            mockValidator.Verify(x => x.IsValid(null));
+            mockValidator.Verify(x => x.IsValid(It.IsAny<string>()));
         }
     }
 }
