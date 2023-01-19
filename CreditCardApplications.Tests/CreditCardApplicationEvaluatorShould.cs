@@ -241,5 +241,21 @@ namespace CreditCardApplications.Tests
             //"Frequent Flyer Number should be validated" is a Custom Error Message
             mockValidator.Verify(x => x.IsValid(It.IsAny<string>()), "Frequent Flyer Number should be validated" );
         }
+
+        [Fact]
+        public void NotValidateFrequentFlyerNumberForHighIncomeApplications()
+        {
+            var mockValidator = new Mock<IFrequentFlyerNumberValidator>();
+
+            mockValidator.Setup(x => x.ServiceInformation.Licence.LicenceKey).Returns((string)"OK");
+
+            var sut = new CreditCardApplicationEvaluator(mockValidator.Object);
+
+            var application = new CreditCardApplication { GrossAnnualIncome = 100_000 };
+
+            sut.Evaluate(application);
+
+            mockValidator.Verify(x => x.IsValid(It.IsAny<string>()), Times.Never);
+        }
     }
 }
