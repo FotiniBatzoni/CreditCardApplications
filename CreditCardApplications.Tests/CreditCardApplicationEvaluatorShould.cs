@@ -221,6 +221,27 @@ namespace CreditCardApplications.Tests
             Assert.Equal(ValidationMode.Deatailed, mockValidator.Object.ValidationMode);
         }
 
+        //[Fact]
+        //public void ValidateFrequentFlyerNumberForLowIncomeApplications()
+        //{
+        //    var mockValidator = new Mock<IFrequentFlyerNumberValidator>();
+
+        //    mockValidator.Setup(x => x.ServiceInformation.Licence.LicenceKey).Returns("OK");
+
+        //    var sut = new CreditCardApplicationEvaluator(mockValidator.Object);
+
+        //    var application = new CreditCardApplication
+        //    {
+        //        FrequentFlyerNumber = "q"
+        //    };
+
+
+        //    sut.Evaluate(application);
+
+        //    //"Frequent Flyer Number should be validated" is a Custom Error Message
+        //    mockValidator.Verify(x => x.IsValid(It.IsAny<string>()), "Frequent Flyer Number should be validated" );
+        //}
+
         [Fact]
         public void ValidateFrequentFlyerNumberForLowIncomeApplications()
         {
@@ -238,8 +259,8 @@ namespace CreditCardApplications.Tests
 
             sut.Evaluate(application);
 
-            //"Frequent Flyer Number should be validated" is a Custom Error Message
-            mockValidator.Verify(x => x.IsValid(It.IsAny<string>()), "Frequent Flyer Number should be validated" );
+         
+            mockValidator.Verify(x => x.IsValid(It.IsAny<string>()), Times.Once );
         }
 
         [Fact]
