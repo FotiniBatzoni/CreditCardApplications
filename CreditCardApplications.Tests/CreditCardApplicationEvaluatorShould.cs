@@ -293,8 +293,25 @@ namespace CreditCardApplications.Tests
 
             sut.Evaluate(application);
 
-            //Veryfing a property getter was called
+            //Veryfing a property getter was called ( the property has been accessed)
             mockValidator.VerifyGet(x => x.ServiceInformation.Licence.LicenceKey);
+        }
+
+        [Fact]
+        public void SetDetailedLookUpForOlderApplications()
+        {
+            var mockValidator = new Mock<IFrequentFlyerNumberValidator>();
+
+            mockValidator.Setup(x => x.ServiceInformation.Licence.LicenceKey).Returns((string)"OK");
+
+            var sut = new CreditCardApplicationEvaluator(mockValidator.Object);
+
+            var application = new CreditCardApplication { Age = 30 };
+
+
+            sut.Evaluate(application);
+
+            mockValidator.VerifySet(x => x.ValidationMode = ValidationMode.Deatailed);
         }
     }
 }
