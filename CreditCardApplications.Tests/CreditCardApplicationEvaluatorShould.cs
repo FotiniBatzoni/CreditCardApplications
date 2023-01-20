@@ -328,6 +328,8 @@ namespace CreditCardApplications.Tests
             mockValidator.Setup(x => x.ServiceInformation.Licence.LicenceKey).Returns((string)"OK");
 
             mockValidator.Setup(x => x.IsValid(It.IsAny<string>())).Throws<Exception>();
+            //for custom error messages
+            //mockValidator.Setup(x => x.IsValid(It.IsAny<string>())).Throws(new Exception("Custom message"));
 
             var sut = new CreditCardApplicationEvaluator(mockValidator.Object);
 
