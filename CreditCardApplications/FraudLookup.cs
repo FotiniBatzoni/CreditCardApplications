@@ -1,9 +1,9 @@
 ﻿
 namespace CreditCardApplications
 {
-    internal class FraudLookup
+    public class FraudLookup
     {
-        public bool isFraudRisk(CreditCardApplication application)
+        public bool IsFraudRisk(CreditCardApplication application)
         {
             if( application.LastName == "Smith")
             {
